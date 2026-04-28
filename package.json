@@ -1,0 +1,23 @@
+{
+  "name": "dietitian_portfolio",
+  "version": "1.0.0",
+  "description": "Niharika's dietitian portfolio website",
+  "scripts": {
+    "start": "live-server --port=8080 --open=index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UmeshChandraBathula/Dietitian_Portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/UmeshChandraBathula/Dietitian_Portfolio/issues"
+  },
+  "homepage": "https://github.com/UmeshChandraBathula/Dietitian_Portfolio#readme",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

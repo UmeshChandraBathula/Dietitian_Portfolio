@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Stories — NUme by Niharika</title>
+  <meta name="description" content="Real results from real clients. Read testimonials and see lab reports from Niharika's nutrition counseling clients." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌿%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* ── Condition-specific color tokens (not in shared CSS) ── */
+    :root {
+      --pcos-bg: #fde8f0;
+      --pcos-text: #b5416e;
+      --pcos-border: #f4b8d0;
+      --diabetes-bg: #fff8e0;
+      --diabetes-text: #9a6b00;
+      --diabetes-border: #fce59a;
+      --weight-gain-bg: #e8f5e9;
+      --weight-gain-text: #2e7d32;
+      --weight-gain-border: #b8deba;
+      --weight-loss-bg: #e3f0fb;
+      --weight-loss-text: #1565a0;
+      --weight-loss-border: #b0d0f0;
+      --arthritis-bg: #f3e5f5;
+      --arthritis-text: #7b1fa2;
+      --arthritis-border: #d9b8e8;
+      --skin-bg: #fff3e0;
+      --skin-text: #e65100;
+      --skin-border: #ffcc80;
+    }
+
+    /* ── PAGE HERO (stories variant — gradient background) ── */
+    .page-hero {
+      background: linear-gradient(135deg, #f0f5ee 0%, var(--cream) 100%);
+      border-bottom: 1px solid var(--cream-dark);
+    }
+
+    /* ── CONDITION LEGEND ── */
+    .legend { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin: 48px 0 0; }
+    .condition-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: 60px;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em;
+      border: 1.5px solid;
+    }
+    .badge-pcos { background: var(--pcos-bg); color: var(--pcos-text); border-color: var(--pcos-border); }
+    .badge-diabetes { background: var(--diabetes-bg); color: var(--diabetes-text); border-color: var(--diabetes-border); }
+    .badge-weight-gain { background: var(--weight-gain-bg); color: var(--weight-gain-text); border-color: var(--weight-gain-border); }
+    .badge-weight-loss { background: var(--weight-loss-bg); color: var(--weight-loss-text); border-color: var(--weight-loss-border); }
+    .badge-arthritis { background: var(--arthritis-bg); color: var(--arthritis-text); border-color: var(--arthritis-border); }
+    .badge-skin { background: var(--skin-bg); color: var(--skin-text); border-color: var(--skin-border); }
+
+    /* ── SECTION HEADER description text (stories uses <p> not .lead) ── */
+    .section-header--center p { max-width: 560px; margin: 0 auto; }
+
+    /* ── TESTIMONIAL CARDS (masonry layout) ── */
+    .testimonials-masonry { columns: 2; column-gap: 28px; margin-top: 56px; }
+    @media (max-width: 768px) { .testimonials-masonry { columns: 1; } }
+
+    .story-card {
+      break-inside: avoid;
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px;
+      margin-bottom: 28px;
+      border: 1px solid var(--cream-dark);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .story-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-soft); }
+
+    .story-card.pcos { border-left: 4px solid var(--pcos-border); }
+    .story-card.diabetes { border-left: 4px solid var(--diabetes-border); }
+    .story-card.weight-gain { border-left: 4px solid var(--weight-gain-border); }
+    .story-card.weight-loss { border-left: 4px solid var(--weight-loss-border); }
+    .story-card.arthritis { border-left: 4px solid var(--arthritis-border); }
+    .story-card.skin { border-left: 4px solid var(--skin-border); }
+
+    .story-card__badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .story-card__stars { font-size: 0.9rem; color: #f59e0b; margin-bottom: 14px; letter-spacing: 2px; }
+
+    .story-card blockquote {
+      font-size: 0.97rem; color: var(--charcoal); line-height: 1.8;
+      font-style: italic; position: relative; padding-left: 20px;
+    }
+    .story-card blockquote::before {
+      content: '"'; position: absolute; left: 0; top: -4px;
+      font-family: var(--font-display); font-size: 2.5rem;
+      color: var(--cream-dark); line-height: 1;
+    }
+
+    .story-card__footer { margin-top: 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .story-card__author { display: flex; align-items: center; gap: 12px; }
+    .story-card__avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+      color: var(--white); flex-shrink: 0;
+    }
+    .avatar-pcos { background: var(--pcos-text); }
+    .avatar-diabetes { background: var(--diabetes-text); }
+    .avatar-weight-gain { background: var(--weight-gain-text); }
+    .avatar-weight-loss { background: var(--weight-loss-text); }
+    .avatar-arthritis { background: var(--arthritis-text); }
+    .avatar-skin { background: var(--skin-text); }
+
+    .story-card__author-info strong { display: block; font-size: 0.9rem; color: var(--charcoal); }
+    .story-card__author-info span { font-size: 0.78rem; color: var(--grey); }
+
+    .proof-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: 60px;
+      font-size: 0.75rem; font-weight: 600; color: var(--grey);
+      border: 1.5px solid var(--cream-dark); cursor: pointer;
+      background: var(--cream); transition: all var(--transition);
+    }
+    .proof-btn:hover { border-color: var(--sage); color: var(--sage); background: #f0f5ee; }
+
+    .result-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--cream); border-radius: var(--radius-sm);
+      padding: 10px 16px; margin-top: 16px; font-size: 0.84rem;
+      border: 1px solid var(--cream-dark); width: 100%;
+    }
+    .result-chip .metric { font-weight: 700; font-size: 1.05rem; color: var(--sage); }
+    .result-chip span { color: var(--grey); }
+
+    /* ── MODAL / LIGHTBOX ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.75); z-index: 1000;
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: var(--white); border-radius: var(--radius);
+      max-width: 520px; width: 100%; max-height: 90vh;
+      overflow-y: auto; position: relative;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.35);
+    }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--cream-dark); border: none; cursor: pointer;
+      font-size: 1rem; display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition); z-index: 10;
+    }
+    .modal-close:hover { background: #e0dbd4; }
+    .modal-img { width: 100%; display: block; border-radius: var(--radius); }
+    .modal-caption { padding: 20px 24px 24px; font-size: 0.85rem; color: var(--grey); text-align: center; line-height: 1.6; }
+    .modal-caption strong { color: var(--charcoal); display: block; margin-bottom: 4px; font-size: 0.9rem; }
+
+    /* ── LAB REPORTS ── */
+    .lab-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 56px; }
+    @media (max-width: 900px) { .lab-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; } }
+
+    .lab-card {
+      background: var(--white); border-radius: var(--radius);
+      border: 1px solid var(--cream-dark); overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .lab-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-soft); }
+
+    .lab-card__header { padding: 24px 24px 16px; border-bottom: 1px solid var(--cream-dark); }
+    .lab-card__header .label { margin-bottom: 8px; }
+    .lab-card__header h3 { font-family: var(--font-display); font-size: 1.15rem; margin-bottom: 6px; }
+    .lab-card__header p { font-size: 0.83rem; color: var(--grey); line-height: 1.5; }
+
+    .hba1c-diff { display: flex; align-items: center; gap: 12px; padding: 20px 24px; }
+    .hba1c-val { flex: 1; text-align: center; padding: 16px 12px; border-radius: var(--radius-sm); }
+    .hba1c-val.before { background: #fff0f0; border: 1.5px solid #ffcdd2; }
+    .hba1c-val.after  { background: #f0f8f0; border: 1.5px solid #c8e6c9; }
+    .hba1c-val .val-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); margin-bottom: 4px; }
+    .hba1c-val .val-num { font-family: var(--font-display); font-size: 1.9rem; font-weight: 700; line-height: 1; }
+    .hba1c-val.before .val-num { color: #c62828; }
+    .hba1c-val.after  .val-num { color: #2e7d32; }
+    .hba1c-val .val-unit { font-size: 0.75rem; color: var(--grey); margin-top: 2px; }
+    .hba1c-arrow { font-size: 1.5rem; color: var(--sage); flex-shrink: 0; }
+    .hba1c-drop {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      background: var(--weight-gain-bg); border-top: 1px solid var(--cream-dark);
+      padding: 12px 24px; font-size: 0.82rem; font-weight: 600; color: var(--weight-gain-text);
+    }
+
+    .lab-card__report { position: relative; padding: 0 24px 24px; }
+    .lab-card__report img {
+      width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--cream-dark);
+      filter: contrast(1.05); display: block; cursor: pointer; transition: filter var(--transition);
+    }
+    .lab-card__report img:hover { filter: contrast(1.1) brightness(1.02); }
+
+    .privacy-overlay {
+      position: absolute; background: linear-gradient(90deg, #e8e4de, #d4cfc8);
+      border-radius: 4px; pointer-events: none; z-index: 5;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .privacy-overlay span { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #9a9690; }
+    .privacy-note { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--grey); padding: 8px 0 0; }
+
+    /* ── Animated fade-in ── */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .story-card, .lab-card { animation: fadeUp 0.5s ease both; }
+    .story-card:nth-child(1) { animation-delay: 0.05s; }
+    .story-card:nth-child(2) { animation-delay: 0.1s; }
+    .story-card:nth-child(3) { animation-delay: 0.15s; }
+    .story-card:nth-child(4) { animation-delay: 0.2s; }
+    .story-card:nth-child(5) { animation-delay: 0.25s; }
+    .story-card:nth-child(6) { animation-delay: 0.3s; }
+  </style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <div class="container">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <span class="logo-brand">NU<span>me</span></span>
+        <span class="logo-sub">by Niharika</span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="index.html#approach">Approach</a></li>
+        <li><a href="stories.html" style="color:var(--sage); font-weight:600;">Stories</a></li>
+        <li><a href="contact.html" class="btn btn-primary nav__cta">Contact Us</a></li>
+      </ul>
+      <button class="nav__toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile">
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="index.html#approach">Approach</a>
+      <a href="stories.html">Client Stories</a>
+      <a href="contact.html" class="btn btn-primary">Contact Us</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <span class="label">Real People · Real Results</span>
+    <h1>Stories that speak<br><em>louder than words</em></h1>
+    <p>These aren't before-and-after photos — they're people who changed their relationship with food, health, and themselves.</p>
+
+    <!-- Condition legend -->
+    <div class="legend">
+      <span class="condition-badge badge-pcos">🌸 PCOS</span>
+      <span class="condition-badge badge-diabetes">🩸 Diabetes Management</span>
+      <span class="condition-badge badge-weight-gain">💪 Weight Gain</span>
+      <span class="condition-badge badge-weight-loss">⚖️ Weight Loss</span>
+      <span class="condition-badge badge-arthritis">🦴 Joint Health</span>
+      <span class="condition-badge badge-skin">✨ Skin & Hormones</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="container">
+    <div class="section-header section-header--center">
+      <span class="label">Client Testimonials</span>
+      <h2>What my clients say, <em>in their own words</em></h2>
+      <p>Each review is verified — click "See original" to view the actual WhatsApp message for complete transparency.</p>
+    </div>
+
+    <div class="testimonials-masonry">
+
+      <!-- ── CARD 1: Weight Gain ── -->
+      <div class="story-card weight-gain">
+        <div class="story-card__badges">
+          <span class="condition-badge badge-weight-gain">💪 Weight Gain</span>
+        </div>
+        <div class="story-card__stars">★★★★★</div>
+        <blockquote>
+          I've been following my personalised diet plan for four months, and the journey has been genuinely transformative. I started at 35 kg and have now reached 42 kg — a steady, healthy gain I'm truly proud of. Throughout the process, I felt energetic, happy, and motivated. Niharika helped me understand it wasn't just about gaining weight, but about feeling better physically and mentally. I truly enjoyed every step.
+        </blockquote>
+        <div class="result-chip">
+          <span class="metric">+7 kg</span>
+          <span>gained over 4 months — steady &amp; healthy</span>
+        </div>
+        <div class="story-card__footer">
+          <div class="story-card__author">
+            <div class="story-card__avatar avatar-weight-gain">P</div>
+            <div class="story-card__author-info">
+              <strong>Sakshi Varadhi</strong>
+              <span>1-on-1 Nutrition Counseling</span>
+            </div>
+          </div>
+          <button class="proof-btn" onclick="openModal('modal-1')">📱 See original</button>
+        </div>
+      </div>
+
+      <!-- ── CARD 2: PCOS + Weight Loss + Hormonal ── -->
+      <div class="story-card pcos">
+        <div class="story-card__badges">
+          <span class="condition-badge badge-pcos">🌸 PCOS</span>
+          <span class="condition-badge badge-weight-loss">⚖️ Weight Loss</span>
+        </div>
+        <div class="story-card__stars">★★★★★</div>
+        <blockquote>
+          Over just a few weeks, I've been feeling lighter, healthier, and more positive — all thanks to Niharika's guidance. She taught me portion control and healthy eating habits I've truly made my own. Whenever I felt like giving up, she gently guided me back on track. I've lost 6 kg, and most importantly — my periods have become regular again. That alone has made me incredibly happy and confident.
+        </blockquote>
+        <div class="result-chip">
+          <span class="metric">–6 kg</span>
+          <span>lost &amp; periods regularised — PCOS managed</span>
+        </div>
+        <div class="story-card__footer">
+          <div class="story-card__author">
+            <div class="story-card__avatar avatar-pcos">A</div>
+            <div class="story-card__author-info">
+              <strong>Sri Lakshmi M</strong>
+              <span>1-on-1 Nutrition Counseling</span>
+            </div>
+          </div>
+          <button class="proof-btn" onclick="openModal('modal-4')">📱 See original</button>
+        </div>
+      </div>
+
+      <!-- ── CARD 3: Arthritis Recovery ── -->
+      <div class="story-card arthritis">
+        <div class="story-card__badges">
+          <span class="condition-badge badge-arthritis">🦴 Joint Health / Arthritis</span>
+        </div>
+        <div class="story-card__stars">★★★★★</div>
+        <blockquote>
+          Because of Niharika's consultation, my arthritis symptoms have improved remarkably. I was even able to stop taking my medication — and those symptoms have not returned. Her diet plan suited my body perfectly and helped me understand what to eat, how much to eat, and how to manage portions. I also reached my target weight. I am deeply grateful for this guidance.
+        </blockquote>
+        <div class="result-chip">
+          <span class="metric">Target weight</span>
+          <span>reached &amp; off arthritis medication</span>
+        </div>
+        <div class="story-card__footer">
+          <div class="story-card__author">
+            <div class="story-card__avatar avatar-arthritis">R</div>
+            <div class="story-card__author-info">
+              <strong>Chandrakala A</strong>
+              <span>Medical Nutrition Therapy</span>
+            </div>
+          </div>
+          <button class="proof-btn" onclick="openModal('modal-3')">📱 See original</button>
+        </div>
+      </div>
+
+      <!-- ── CARD 5: PCOS Skin / Pimples ── -->
+      <div class="story-card pcos">
+        <div class="story-card__badges">
+          <span class="condition-badge badge-pcos">🌸 PCOS</span>
+          <span class="condition-badge badge-skin">✨ Skin</span>
+        </div>
+        <div class="story-card__stars">★★★★★</div>
+        <blockquote>
+          Something I noticed recently — my skin has become so much clearer. I'm sure it's because of the diet, because my skin was never this clear before. With PCOS, I used to get a lot of pimples along my jawline. Now they've reduced significantly. I'm so happy with the results and couldn't have done this without Niharika's guidance!
+        </blockquote>
+        <div class="result-chip">
+          <span class="metric">Jawline acne</span>
+          <span>significantly reduced — PCOS-related improvement</span>
+        </div>
+        <div class="story-card__footer">
+          <div class="story-card__author">
+            <div class="story-card__avatar avatar-pcos">S</div>
+            <div class="story-card__author-info">
+              <strong>Madhuri P</strong>
+              <span>PCOS Nutrition Plan</span>
+            </div>
+          </div>
+          <button class="proof-btn" onclick="openModal('modal-9')">📱 See original</button>
+        </div>
+      </div>
+
+      <!-- ── CARD 6: Daughter's weight gain ── -->
+      <div class="story-card weight-gain">
+        <div class="story-card__badges">
+          <span class="condition-badge badge-weight-gain">💪 Weight Gain</span>
+        </div>
+        <div class="story-card__stars">★★★★★</div>
+        <blockquote>
+          I had a truly wonderful experience working with Niharika for my daughter's weight gain journey. She was so encouraging and always took the time to explain everything clearly — never rushing. She responded to every message, no matter when I reached out. She isn't just a nutritionist. At this point, she genuinely feels like a member of our family. Thank you, Niharika, for your unwavering support and care!
+        </blockquote>
+        <div class="story-card__footer">
+          <div class="story-card__author">
+            <div class="story-card__avatar avatar-weight-gain">L</div>
+            <div class="story-card__author-info">
+              <strong>Lohitha</strong>
+              <span>Paediatric / Family Nutrition</span>
+            </div>
+          </div>
+          <button class="proof-btn" onclick="openModal('modal-6')">📱 See original</button>
+        </div>
+      </div>
+
+      <!-- ── CARD 7: Weight Gain — Shravani P. ── -->
+      <div class="story-card weight-gain">
+        <div class="story-card__badges">
+          <span class="condition-badge badge-weight-gain">💪 Weight Gain</span>
+        </div>
+        <div class="story-card__stars">★★★★★</div>
+        <blockquote>
+          It's been 3 weeks since I started following your guidance and I've already seen some great results. My digestion has improved a lot, and I'm feeling more energetic. I've also noticed a decrease in junk food cravings. I'm now able to eat a good quantity of food consistently. You're right — weight gain takes time, and I'm committed to continuing with your plan. Thank you for motivating me and giving me confidence. It's made a big difference.
+        </blockquote>
+        <div class="result-chip">
+          <span class="metric">3 weeks</span>
+          <span>improved digestion, more energy &amp; reduced cravings</span>
+        </div>
+        <div class="story-card__footer">
+          <div class="story-card__author">
+            <div class="story-card__avatar avatar-weight-gain">S</div>
+            <div class="story-card__author-info">
+              <strong>Shravani P.</strong>
+              <span>1-on-1 Nutrition Counseling</span>
+            </div>
+          </div>
+          <button class="proof-btn" onclick="openModal('modal-10')">📱 See original</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- LAB REPORTS -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-header section-header--center">
+      <span class="label">Clinical Evidence</span>
+      <h2>Lab reports don't lie —<br><em>the numbers tell the story</em></h2>
+      <p>Actual HbA1c (blood sugar) reports from clients before and after nutrition counseling. Patient names have been removed to protect privacy.</p>
+    </div>
+
+    <div class="lab-grid">
+
+      <!-- ── LAB 1: Madhavi (Diabetes) ── -->
+      <div class="lab-card">
+        <div class="lab-card__header">
+          <span class="label">Diabetes Management</span>
+          <h3>Mrs. M, 47F</h3>
+          <p>HbA1c reduced from unsatisfactory to fair control range in approximately 5 weeks.</p>
+        </div>
+        <div class="hba1c-diff">
+          <div class="hba1c-val before">
+            <div class="val-label">Before</div>
+            <div class="val-num">7.0<span style="font-size:1rem;">%</span></div>
+            <div class="val-unit">Sep 2025</div>
+          </div>
+          <div class="hba1c-arrow">→</div>
+          <div class="hba1c-val after">
+            <div class="val-label">After</div>
+            <div class="val-num">6.6<span style="font-size:1rem;">%</span></div>
+            <div class="val-unit">Oct 2025</div>
+          </div>
+        </div>
+        <div class="hba1c-drop">📉 Improved from Fair → Good Control zone</div>
+        <div class="lab-card__report" style="padding-top:16px;">
+          <img
+            src="images/Reviews_Reports/WhatsApp_Image_2026-03-03_at_6_27_16_PM.jpeg"
+            alt="HbA1c lab report — patient name redacted"
+            onclick="openModal('modal-lab-1')"
+            title="Click to view full report"
+          />
+          <p class="privacy-note">🔒 Patient name redacted to protect privacy</p>
+        </div>
+      </div>
+
+      <!-- ── LAB 2: Swapna (Diabetes major improvement) ── -->
+      <div class="lab-card">
+        <div class="lab-card__header">
+          <span class="label">Diabetes Management</span>
+          <h3>Mrs. S, 42F → 45F</h3>
+          <p>Remarkable HbA1c reduction from poor control to improved range over approx. 3 years of counseling.</p>
+        </div>
+        <div class="hba1c-diff">
+          <div class="hba1c-val before">
+            <div class="val-label">Before</div>
+            <div class="val-num">8.5<span style="font-size:1rem;">%</span></div>
+            <div class="val-unit">Pre-counseling</div>
+          </div>
+          <div class="hba1c-arrow">→</div>
+          <div class="hba1c-val after">
+            <div class="val-label">After</div>
+            <div class="val-num">7.2<span style="font-size:1rem;">%</span></div>
+            <div class="val-unit">Jan 2026</div>
+          </div>
+        </div>
+        <div class="hba1c-drop">📉 –1.3 points — from Poor to Fair/Good Control</div>
+        <div class="lab-card__report" style="padding-top:16px;">
+          <img
+            src="images/Reviews_Reports/WhatsApp_Image_2026-03-03_at_6_29_50_PM.jpeg"
+            alt="HbA1c lab report — patient name redacted"
+            onclick="openModal('modal-lab-2')"
+            title="Click to view full report"
+          />
+          <p class="privacy-note">🔒 Patient name redacted to protect privacy</p>
+        </div>
+      </div>
+
+      <!-- ── LAB 3: Harsha (Pre-diabetes reversed) ── -->
+      <div class="lab-card">
+        <div class="lab-card__header">
+          <span class="label">Pre-Diabetes Prevention</span>
+          <h3>Mr. H, 31M</h3>
+          <p>HbA1c brought back to fully normal range — pre-diabetic risk completely reversed through diet.</p>
+        </div>
+        <div class="hba1c-diff">
+          <div class="hba1c-val before">
+            <div class="val-label">Before</div>
+            <div class="val-num">5.5<span style="font-size:1rem;">%</span></div>
+            <div class="val-unit">Sep 2025</div>
+          </div>
+          <div class="hba1c-arrow">→</div>
+          <div class="hba1c-val after">
+            <div class="val-label">After</div>
+            <div class="val-num">4.7<span style="font-size:1rem;">%</span></div>
+            <div class="val-unit">Dec 2025</div>
+          </div>
+        </div>
+        <div class="hba1c-drop">✅ Fully normal range — pre-diabetes risk eliminated</div>
+        <div class="lab-card__report" style="padding-top:16px;">
+          <img
+            src="images/Reviews_Reports/WhatsApp_Image_2026-03-03_at_6_29_10_PM.jpeg"
+            alt="HbA1c lab report — patient name redacted"
+            onclick="openModal('modal-lab-3')"
+            title="Click to view full report"
+          />
+          <p class="privacy-note">🔒 Patient name redacted to protect privacy</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <span class="label" style="color:rgba(255,255,255,0.7);">Your Story Could Be Next</span>
+    <h2>Ready to write your<br>own success story?</h2>
+    <p>Book a free 15-minute discovery call. No pressure, no commitment — just a conversation about where you are and where you want to be.</p>
+    <a href="contact.html" class="btn btn-white">Contact Us</a>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="index.html" class="nav__logo">
+          <span class="logo-brand">NU<span style="color:#B5622A;font-style:italic;">me</span></span>
+          <span class="logo-sub" style="color:rgba(255,255,255,0.5);">by Niharika</span>
+        </a>
+        <p>Science-backed, personalized nutrition counseling by Niharika. Telehealth available.</p>
+      </div>
+      <div class="footer__col"><h5>Quick Links</h5><ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+      <div class="footer__col"><h5>Services</h5><ul>
+        <li><a href="services.html">1-on-1 Counseling</a></li>
+        <li><a href="services.html">Monthly Membership</a></li>
+        <li><a href="services.html">Group Programs</a></li>
+      </ul></div>
+      <div class="footer__col"><h5>Get in Touch</h5>
+        <p style="font-size:0.88rem;line-height:1.7;">📍 Hyderabad, India<br><br>📧 <a href="/cdn-cgi/l/email-protection#650b1008004b0604170011000408250208040c094b060a08" style="color:rgba(255,255,255,0.55)"><span class="__cf_email__" data-cfemail="b1dfc4dcd49fd2d0c3d4c5d4d0dcf1d6dcd0d8dd9fd2dedc">[email&#160;protected]</span></a></p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2025 NUme by Niharika. All rights reserved.</p>
+      <div class="footer__bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════
+     MODALS (Screenshots)
+══════════════════════ -->
+
+<!-- Testimonial screenshots -->
+<div class="modal-overlay" id="modal-1" onclick="closeModal(event, 'modal-1')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('modal-1').classList.remove('open')">✕</button>
+    <img class="modal-img" src="images/Reviews_Reports/WhatsApp_Image_2026-03-02_at_2_31_27_PM.jpeg" alt="Original WhatsApp review — weight gain journey" />
+    <div class="modal-caption">
+      <strong>Original message — Weight Gain Journey</strong>
+      This is the unedited WhatsApp message from the client. The professional testimonial on the website is a faithful translation of this review.
+    </div>
+  </div>
+</div>
+
+
+<div class="modal-overlay" id="modal-3" onclick="closeModal(event, 'modal-3')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('modal-3').classList.remove('open')">✕</button>
+    <img class="modal-img" src="images/Reviews_Reports/WhatsApp_Image_2026-03-02_at_2_31_28_PM.jpeg" alt="Original WhatsApp review — arthritis recovery" />
+    <div class="modal-caption">
+      <strong>Original message — Arthritis Recovery</strong>
+      This client was able to stop arthritis medication and reach their target weight through diet alone.
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-4" onclick="closeModal(event, 'modal-4')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('modal-4').classList.remove('open')">✕</button>
+    <img class="modal-img" src="images/Reviews_Reports/WhatsApp_Image_2026-03-02_at_2_31_29_PM__1_.jpeg" alt="Original WhatsApp review — PCOS weight loss" />
+    <div class="modal-caption">
+      <strong>Original message — PCOS & Weight Loss</strong>
+      Client lost 6 kg and achieved hormonal regularity (periods became regular) through Niharika's PCOS nutrition plan.
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-6" onclick="closeModal(event, 'modal-6')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('modal-6').classList.remove('open')">✕</button>
+    <img class="modal-img" src="images/Reviews_Reports/WhatsApp_Image_2026-03-02_at_2_31_29_PM.jpeg" alt="Original WhatsApp review — daughter weight gain" />
+    <div class="modal-caption">
+      <strong>Original message — Daughter's Weight Gain Journey</strong>
+      A mother writes about her daughter's weight gain experience. The second message is in Telugu, expressing that Niharika feels like family now.
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-9" onclick="closeModal(event, 'modal-9')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('modal-9').classList.remove('open')">✕</button>
+    <img class="modal-img" src="images/Reviews_Reports/WhatsApp_Image_2026-03-02_at_2_34_42_PM.jpeg" alt="Original WhatsApp review — PCOS skin pimples" />
+    <div class="modal-caption">
+      <strong>Original message — PCOS Skin Improvement</strong>
+      Written in Telugu: "I noticed my face is getting very clear — I think it's the diet. Before, it was never this clear. With PCOS I had lots of pimples on my jawline. Now they've reduced a lot."
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-10" onclick="closeModal(event, 'modal-10')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('modal-10').classList.remove('open')">✕</button>
+    <img class="modal-img" src="images/Reviews_Reports/WhatsApp_Image_2026-03-03_at_5_28_19_PM.jpeg" alt="Original WhatsApp review — weight gain journey" />
+    <div class="modal-caption">
+      <strong>Original message — Weight Gain Journey</strong>
+      Shravani shares her progress after 3 weeks of nutrition counseling — improved digestion, more energy, and a positive mindset toward healthy weight gain.
+    </div>
+  </div>
+</div>
+
+<!-- Lab report modals -->
+<div class="modal-overlay" id="modal-lab-1" onclick="closeModal(event, 'modal-lab-1')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('modal-lab-1').classList.remove('open')">✕</button>
+    <img class="modal-img" src="images/Reviews_Reports/WhatsApp_Image_2026-03-03_at_6_27_16_PM.jpeg" alt="HbA1c lab report — Mrs. M" />
+    <div class="modal-caption">
+      <strong>HbA1c Lab Report — Mrs. M, 47F (Diabetes Management)</strong>
+      Two Thyrocare reports showing HbA1c improvement from 7.0% to 6.6% over approximately 5 weeks. Patient name has been redacted.
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-lab-2" onclick="closeModal(event, 'modal-lab-2')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('modal-lab-2').classList.remove('open')">✕</button>
+    <img class="modal-img" src="images/Reviews_Reports/WhatsApp_Image_2026-03-03_at_6_29_50_PM.jpeg" alt="HbA1c lab report — Mrs. S" />
+    <div class="modal-caption">
+      <strong>HbA1c Lab Report — Mrs. S (Diabetes Management)</strong>
+      Two Thyrocare reports showing HbA1c reduction from 8.5% to 7.2%. A significant improvement from poor to fair control. Patient name has been redacted.
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-lab-3" onclick="closeModal(event, 'modal-lab-3')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('modal-lab-3').classList.remove('open')">✕</button>
+    <img class="modal-img" src="images/Reviews_Reports/WhatsApp_Image_2026-03-03_at_6_29_10_PM.jpeg" alt="HbA1c lab report — Mr. H" />
+    <div class="modal-caption">
+      <strong>HbA1c Lab Report — Mr. H, 31M (Pre-Diabetes Prevention)</strong>
+      Two reports showing HbA1c reduced from 5.5% to 4.7% — fully back in the normal range. Pre-diabetic risk completely resolved. Patient name has been redacted.
+    </div>
+  </div>
+</div>
+
+
+<script src="js/script.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  function openModal(id) {
+    document.getElementById(id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(e, id) {
+    if (e.target === e.currentTarget) {
+      document.getElementById(id).classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+  document.querySelectorAll('.modal-close').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.modal-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.open').forEach(m => {
+        m.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

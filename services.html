@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — NUme by Niharika</title>
+  <meta name="description" content="Personalized nutrition counseling services — 1-on-1, monthly memberships, and group programs." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* Pricing cards */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 56px;
+      align-items: start;
+    }
+    .pricing-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      border: 2px solid var(--cream-dark);
+      overflow: hidden;
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+    .pricing-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--sage-pale);
+      box-shadow: var(--shadow-soft);
+    }
+    .pricing-card--featured {
+      border-color: var(--sage);
+      position: relative;
+    }
+
+    .pricing-card__header {
+      padding: 40px 36px 28px;
+      background: var(--cream);
+      border-bottom: 1px solid var(--cream-dark);
+    }
+    .pricing-card--featured .pricing-card__header {
+      background: linear-gradient(135deg, var(--sage) 0%, #3a5332 100%);
+      border-bottom: none;
+    }
+    .pricing-card--featured .pricing-card__header * { color: var(--white); }
+    .pricing-card__icon { font-size: 2.2rem; margin-bottom: 16px; }
+    .pricing-card__header h3 { margin-bottom: 8px; }
+    .pricing-card__header p { font-size: 0.9rem; color: var(--grey); line-height: 1.65; }
+    .pricing-card__body {
+      padding: 32px 36px 40px;
+    }
+    .pricing-features {
+      margin-bottom: 32px;
+    }
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+      color: var(--charcoal);
+      line-height: 1.5;
+    }
+    .pricing-features li::before {
+      content: '✓';
+      color: var(--sage);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .pricing-card .btn { width: 100%; text-align: center; justify-content: center; }
+    @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; } }
+
+    /* Specialty areas */
+    .specialty-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .specialty-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 24px;
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--cream-dark);
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .specialty-card:hover { border-color: var(--sage-pale); box-shadow: var(--shadow-card); }
+    .specialty-card__icon { font-size: 1.8rem; flex-shrink: 0; }
+    .specialty-card h4 { font-size: 0.98rem; margin-bottom: 4px; }
+    .specialty-card p { font-size: 0.82rem; color: var(--grey); line-height: 1.6; }
+    @media (max-width: 768px) { .specialty-grid { grid-template-columns: 1fr; } }
+
+    /* FAQ */
+    .faq-list { margin-top: 48px; }
+    .faq-item {
+      border-bottom: 1px solid var(--cream-dark);
+      overflow: hidden;
+    }
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0;
+      cursor: pointer;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      user-select: none;
+      gap: 16px;
+    }
+    .faq-question:hover { color: var(--sage); }
+    .faq-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--cream-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      transition: transform var(--transition), background var(--transition);
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--sage); color: var(--white); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      font-size: 0.95rem;
+      color: var(--grey);
+      line-height: 1.8;
+    }
+    .faq-item.open .faq-answer { max-height: 300px; padding-bottom: 24px; }
+  </style>
+</head>
+
+<body>
+
+<nav class="nav" id="mainNav">
+  <div class="container">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <span class="logo-brand">NU<span>me</span></span>
+        <span class="logo-sub">by Niharika</span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="index.html#approach">Approach</a></li>
+        <li><a href="stories.html">Stories</a></li>
+        <li><a href="contact.html" class="btn btn-primary nav__cta">Contact Us</a></li>
+      </ul>
+      <button class="nav__toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+    <div class="nav__mobile">
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="index.html#approach">Approach</a>
+      <a href="stories.html">Client Stories</a>
+      <a href="contact.html" class="btn btn-primary">Contact Us</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <span class="label">Nutrition Services</span>
+    <h1>A plan designed<br><em>for your real life</em></h1>
+    <p>Every service is personalized, science-backed, and built around your unique goals, lifestyle, and health needs.</p>
+  </div>
+</section>
+
+
+<!-- PRICING CARDS -->
+<section class="section">
+  <div class="container">
+    <div class="section-header section-header--center reveal">
+      <span class="label">Choose Your Path</span>
+      <h2>Flexible options for<br>every <em>journey & budget</em></h2>
+    </div>
+
+    <div class="pricing-grid">
+
+      <div class="pricing-card reveal delay-1">
+        <div class="pricing-card__header">
+          <div class="pricing-card__icon">🌱</div>
+          <h3>Monthly Wellness Membership</h3>
+          <p>Ongoing, comprehensive support with regular check-ins and consistent guidance every month.</p>
+        </div>
+        <div class="pricing-card__body">
+          <ul class="pricing-features">
+            <li>4 sessions per month</li>
+            <li>Weekly accountability check-ins</li>
+            <li>Personalized meal guidance</li>
+            <li>Progress tracking & plan adjustments</li>
+            <li>Messaging support between sessions</li>
+            <li>Customized lifestyle recommendations</li>
+          </ul>
+          <a href="contact.html" class="btn btn-primary">Get Started</a>
+        </div>
+      </div>
+
+      <div class="pricing-card pricing-card--featured reveal delay-2">
+        <div class="pricing-card__header">
+          <div class="pricing-card__icon">🥗</div>
+          <h3>1:1 Personalized Nutrition</h3>
+          <p>A fully personalized 90-day plan addressing nutrition, lifestyle, and holistic well-being.</p>
+        </div>
+        <div class="pricing-card__body">
+          <ul class="pricing-features">
+            <li>Personalized meal plan — recipes, portion guides & eating-out tips</li>
+            <li>Everyday WhatsApp support & progress tracking</li>
+            <li>Regular 1:1 follow-up calls</li>
+            <li>Travel, festival & lifestyle guidance</li>
+            <li>Stress management coaching & detox program</li>
+            <li>Meditation (voice notes), journaling & affirmations</li>
+          </ul>
+          <a href="contact.html" class="btn btn-primary">Contact Us</a>
+        </div>
+      </div>
+
+      <div class="pricing-card reveal delay-3" style="position:relative; opacity:0.8;">
+        <span class="coming-soon-badge">Coming Soon</span>
+        <div class="pricing-card__header">
+          <div class="pricing-card__icon">👥</div>
+          <h3>Group Nutrition Programs</h3>
+          <p>Community-based nutrition programs with expert guidance and peer accountability.</p>
+        </div>
+        <div class="pricing-card__body">
+          <ul class="pricing-features">
+            <li>Weekly group sessions (60 min)</li>
+            <li>Small groups (max 8 people)</li>
+            <li>Shared community platform</li>
+            <li>Group meal planning resources</li>
+            <li>Monthly 1-on-1 check-in</li>
+            <li>Guest expert workshops</li>
+          </ul>
+          <a href="contact.html" class="btn btn-outline" style="pointer-events:none; opacity:0.5;">Coming Soon</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- SPECIALTY AREAS -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-header section-header--center reveal">
+      <span class="label">Areas of Expertise</span>
+      <h2>Specialized support for<br><em>your specific needs</em></h2>
+    </div>
+
+    <div class="specialty-grid">
+      <div class="specialty-card reveal delay-1">
+        <span class="specialty-card__icon">🍽️</span>
+        <div>
+          <h4>Intuitive Eating</h4>
+          <p>Break free from diet culture and rebuild a peaceful, healthy relationship with food and your body.</p>
+        </div>
+      </div>
+      <div class="specialty-card reveal delay-2">
+        <span class="specialty-card__icon">⚖️</span>
+        <div>
+          <h4>Weight Management</h4>
+          <p>Sustainable, non-restrictive approaches to reaching and maintaining a healthy weight without deprivation.</p>
+        </div>
+      </div>
+      <div class="specialty-card reveal delay-3">
+        <span class="specialty-card__icon">🫀</span>
+        <div>
+          <h4>Heart Health</h4>
+          <p>Evidence-based nutrition strategies to support cardiovascular health and manage cholesterol and blood pressure.</p>
+        </div>
+      </div>
+      <div class="specialty-card reveal delay-1">
+        <span class="specialty-card__icon">🩸</span>
+        <div>
+          <h4>Diabetes Management</h4>
+          <p>Personalized meal planning and blood sugar management strategies for Type 1, Type 2, and prediabetes.</p>
+        </div>
+      </div>
+      <div class="specialty-card reveal delay-2">
+        <span class="specialty-card__icon">🫁</span>
+        <div>
+          <h4>Gut Health & IBS</h4>
+          <p>Low-FODMAP guidance, food sensitivity support, and strategies to manage IBS, IBD, and digestive symptoms.</p>
+        </div>
+      </div>
+      <div class="specialty-card reveal delay-1">
+        <span class="specialty-card__icon">🌸</span>
+        <div>
+          <h4>Women's Health</h4>
+          <p>Nutrition support for hormonal health, PCOS, fertility, pregnancy, postpartum, and menopause.</p>
+        </div>
+      </div>
+      <div class="specialty-card reveal delay-2">
+        <span class="specialty-card__icon">🧠</span>
+        <div>
+          <h4>Disordered Eating</h4>
+          <p>Compassionate, non-diet support for those recovering from restrictive eating patterns and building food peace.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FAQ -->
+<section class="section section--alt">
+  <div class="container" style="max-width:800px;">
+    <div class="section-header reveal">
+      <span class="label">FAQ</span>
+      <h2>Questions I get<br><em>all the time</em></h2>
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item reveal">
+        <div class="faq-question">
+          What's the difference between a Dietitian and a Nutritionist?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          In India, the title "nutritionist" is currently unregulated — there is no single national body that licenses or registers nutritionists, so the title alone tells you little. This is changing: the National Commission for Allied and Healthcare Professions (NCAHP) Act, 2021 is gradually bringing allied health professions, including nutrition, under a structured regulatory framework. A "Registered Dietitian" in India typically refers to someone with a formal dietetics degree (B.Sc. or M.Sc. Dietetics) registered with a state-level body. Niharika holds a Diploma in Food Therapy &amp; Nutrition from the National Board of Vocational Training Education (NBVTE), along with a Master of Pharmacy — a combination that gives her both the clinical nutrition training and the deep pharmacological background to provide well-rounded, science-grounded dietary guidance.
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-question">
+          Do you offer telehealth appointments?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          Yes! All services are available online, and I work with clients across India and internationally. Sessions are conducted via a secure video call platform. All you need is a device with a camera and a quiet space.
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-question">
+          How many sessions will I need?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          It varies by person and goal. Some clients see meaningful progress in 4-6 sessions; others prefer ongoing support. We always start with an initial consultation to understand your needs and then discuss the best path forward — with absolutely no pressure to commit to anything upfront.
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-question">
+          Will you give me a meal plan?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          Yes, if that's what works best for you! Some clients love a detailed meal plan, others prefer flexible frameworks and principles. We tailor the tools to your learning style and lifestyle — not a one-size-fits-all approach.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <span class="label label--sage reveal">Take the First Step</span>
+    <h2 class="reveal">Not sure which service<br>is right for you?</h2>
+    <p class="reveal">Let's chat! Book a free 15-minute discovery call and we'll figure out the best fit together — no commitment required.</p>
+    <div class="btn-actions reveal">
+      <a href="contact.html" class="btn btn-white">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="index.html" class="nav__logo">
+          <span class="logo-brand">NU<span style="color:var(--terra);font-style:italic;">me</span></span>
+          <span class="logo-sub" style="color:rgba(255,255,255,0.5);">by Niharika</span>
+        </a>
+        <p>Science-backed, personalized nutrition counseling by Niharika. Telehealth available.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="Instagram">📷</a>
+        </div>
+      </div>
+      <div class="footer__col"><h5>Quick Links</h5><ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+      <div class="footer__col"><h5>Services</h5><ul>
+        <li><a href="services.html">1:1 Personalized Nutrition</a></li>
+        <li><a href="services.html">Monthly Wellness Membership</a></li>
+        <li><a href="services.html">Group Nutrition Programs</a></li>
+        
+      </ul></div>
+      <div class="footer__col"><h5>Get in Touch</h5><address>
+        📍 Hyderabad, India<br><br>
+        📧 <a href="mailto:nume.careteam@gmail.com" style="color:rgba(255,255,255,0.55)">nume.careteam@gmail.com</a>
+      </address></div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2025 NUme by Niharika. All rights reserved.</p>
+      <div class="footer__bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms & Conditions</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>

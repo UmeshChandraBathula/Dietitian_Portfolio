@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NUme by Niharika — Personalized Nutrition Counseling</title>
+  <meta name="description" content="Science-backed, personalized nutrition counseling with Niharika, Certified Nutrition &amp; Food Therapy Consultant. Feel your best from the inside out." />
+
+  <!-- Fonts loaded via CSS @import -->
+  <!-- Favicon placeholder -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>" />
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Page-specific styles -->
+  <style>
+    /* Hero placeholder image (replace with real photo) */
+    .hero__image-wrap {
+      background: linear-gradient(135deg, #D6E5D2 0%, #EAC4A0 100%);
+    }
+    .hero__image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8rem;
+      opacity: 0.4;
+    }
+
+    /* Condition badges for testimonials */
+    .condition-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 12px; border-radius: 60px;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em;
+      border: 1.5px solid; margin-bottom: 12px;
+    }
+    .badge-pcos { background: #fde8f0; color: #b5416e; border-color: #f4b8d0; }
+    .badge-weight-gain { background: #e8f5e9; color: #2e7d32; border-color: #b8deba; }
+    .badge-weight-loss { background: #e3f0fb; color: #1565a0; border-color: #b0d0f0; }
+    .badge-arthritis { background: #f3e5f5; color: #7b1fa2; border-color: #d9b8e8; }
+    .badge-family { background: #fff8e0; color: #9a6b00; border-color: #fce59a; }
+
+    /* Result chip inside testimonial cards */
+    .testimonial-result {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--cream); border-radius: 8px;
+      padding: 9px 14px; margin: 12px 0; font-size: 0.82rem;
+      border: 1px solid var(--cream-dark);
+    }
+    .testimonial-result .metric { font-weight: 700; font-size: 1rem; color: var(--sage); }
+
+    /* 2-column testimonials grid on homepage */
+    .testimonials-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+    @media (max-width: 768px) {
+      .testimonials-grid { grid-template-columns: 1fr !important; }
+    }
+
+    /* About placeholder */
+    .about-image-placeholder {
+      width: 100%;
+      height: 100%;
+      min-height: 500px;
+      background: linear-gradient(160deg, #c5d9c1 0%, #e8c4a0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7rem;
+      opacity: 0.5;
+    }
+
+    /* Stats bar */
+    .stats-bar {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px 48px;
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: -60px;
+      position: relative;
+      z-index: 10;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 0 20px;
+      border-right: 1px solid var(--cream-dark);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-item .num {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--sage);
+      display: block;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-item p {
+      font-size: 0.82rem;
+      color: var(--grey);
+      line-height: 1.4;
+    }
+    @media (max-width: 768px) {
+      .stats-bar {
+        grid-template-columns: 1fr 1fr;
+        margin-top: 0;
+        border-radius: 0;
+        gap: 12px;
+        padding: 28px 24px;
+      }
+      .stat-item { padding: 12px; border-right: none; border-bottom: 1px solid var(--cream-dark); }
+      .stat-item:nth-child(3),
+      .stat-item:last-child { border-bottom: none; }
+    }
+
+    /* Approach section */
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .approach-card {
+      padding: 36px 30px;
+      border-radius: var(--radius);
+      background: var(--white);
+      border: 1px solid var(--cream-dark);
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+    .approach-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--sage-pale);
+      box-shadow: var(--shadow-soft);
+    }
+    .approach-card__emoji {
+      font-size: 2.4rem;
+      margin-bottom: 18px;
+      display: block;
+    }
+    .approach-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: var(--sage);
+    }
+    .approach-card p {
+      font-size: 0.9rem;
+      color: var(--grey);
+      line-height: 1.7;
+    }
+    @media (max-width: 768px) {
+      .approach-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Media logos */
+    .media-strip {
+      text-align: center;
+      padding: 48px 0;
+      border-top: 1px solid var(--cream-dark);
+      border-bottom: 1px solid var(--cream-dark);
+      margin: 48px 0;
+    }
+    .media-strip p {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 28px;
+    }
+    .media-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .media-logo {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--grey);
+      opacity: 0.45;
+      letter-spacing: 0.05em;
+      transition: opacity var(--transition);
+    }
+    .media-logo:hover { opacity: 0.8; }
+
+    /* ── Floating food card on hero ── */
+    .hero__food-card {
+      position: absolute;
+      bottom: 48px;
+      left: -28px;
+      z-index: 10;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: 0 16px 48px rgba(44,44,44,0.18);
+      overflow: hidden;
+      width: 200px;
+      animation: cardFloat 5s ease-in-out infinite;
+    }
+    .hero__food-card img {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+      display: block;
+    }
+    .hero__food-card__label {
+      padding: 12px 14px;
+    }
+    .hero__food-card__label p {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 2px;
+    }
+    .hero__food-card__label span {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      color: var(--charcoal);
+    }
+    @keyframes cardFloat {
+      0%, 100% { transform: translateY(0px) rotate(-1deg); }
+      50%       { transform: translateY(-10px) rotate(0.5deg); }
+    }
+    @media (max-width: 768px) {
+      .hero__food-card { display: none; }
+    }
+
+    /* ── Freebie section — new image layout ── */
+    .freebie {
+      background: var(--cream-dark);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 340px 1fr auto;
+      align-items: stretch;
+      gap: 0;
+    }
+    .freebie__image {
+      position: relative;
+      overflow: hidden;
+    }
+    .freebie__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .freebie__image:hover img { transform: scale(1.04); }
+    .freebie__image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, transparent 70%, var(--cream-dark));
+    }
+    .freebie__content {
+      padding: 52px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .freebie h3 { margin-bottom: 12px; }
+    .freebie p { color: var(--grey); max-width: 420px; line-height: 1.7; }
+    .freebie-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-width: 260px;
+      padding: 52px 52px 52px 0;
+      justify-content: center;
+    }
+    .freebie-form input {
+      padding: 14px 20px;
+      border: 1.5px solid rgba(74,103,65,0.2);
+      border-radius: 60px;
+      background: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--charcoal);
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .freebie-form input:focus {
+      border-color: var(--sage);
+      box-shadow: 0 0 0 3px var(--sage-pale);
+    }
+    .freebie-form input::placeholder { color: var(--grey); }
+    @media (max-width: 1024px) {
+      .freebie { grid-template-columns: 260px 1fr; }
+      .freebie-form { grid-column: 2; padding: 0 40px 40px; }
+    }
+    @media (max-width: 768px) {
+      .freebie { grid-template-columns: 1fr; }
+      .freebie__image { height: 220px; }
+      .freebie__image::after { background: linear-gradient(to top, var(--cream-dark), transparent); }
+      .freebie__content { padding: 32px 28px 20px; }
+      .freebie-form { padding: 0 28px 32px; min-width: unset; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ══════════════════════════════════════════
+     NAVIGATION
+══════════════════════════════════════════ -->
+<nav class="nav" id="mainNav">
+  <div class="container">
+    <div class="nav__inner">
+
+      <!-- Logo -->
+      <a href="index.html" class="nav__logo">
+        <span class="logo-brand">NU<span>me</span></span>
+        <span class="logo-sub">by Niharika</span>
+      </a>
+
+      <!-- Desktop Links -->
+      <ul class="nav__links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="index.html#approach">Approach</a></li>
+        <li><a href="stories.html">Stories</a></li>
+        <li>
+          <a href="contact.html" class="btn btn-primary nav__cta">Contact Us</a>
+        </li>
+      </ul>
+
+      <!-- Mobile Toggle -->
+      <button class="nav__toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="nav__mobile">
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="index.html#approach">Approach</a>
+      <a href="stories.html">Client Stories</a>
+      <a href="contact.html" class="btn btn-primary">Contact Us</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section class="hero">
+
+  <!-- Left: Copy -->
+  <div class="hero__left">
+    <div class="hero__eyebrow">
+      <span class="label">Certified Nutrition &amp; Food Therapy Consultant</span>
+    </div>
+
+    <h1 class="hero__title">
+      Nourish your body,<br>
+      <em>reclaim your joy</em>
+    </h1>
+
+    <p class="hero__subtitle">
+      Personalized, science-backed nutrition counseling that meets you 
+      where you are — no fads, no restrictions, just a realistic path 
+      to feeling your very best.
+    </p>
+
+    <div class="hero__actions">
+      <a href="contact.html" class="btn btn-primary">Contact Us</a>
+      <a href="services.html" class="btn btn-outline">View Services</a>
+    </div>
+
+    <div class="hero__trust">
+      <div class="hero__trust-avatars">
+        <span>😊</span><span>🌟</span><span>💚</span>
+      </div>
+      <p>
+        <strong>70+ happy clients</strong>
+      </p>
+    </div>
+  </div>
+
+  <!-- Right: Hero Image -->
+  <div class="hero__right">
+    <div class="hero__image-wrap">
+      <!--
+        Hero image — Niharika's photo
+      -->
+      <img src="images/greek-quinoa-buddha-bowl-vegan-gluten-free-1.jpg" alt="Nourishing food — NUme by Niharika" style="object-position: center center;" />
+      
+    </div>
+
+    <!-- Floating smoothie bowl food card -->
+    <div class="hero__food-card">
+      <img src="images/greek-quinoa-buddha-bowl-vegan-gluten-free-1.jpg" alt="Smoothie bowl — nutritious & delicious" />
+      <div class="hero__food-card__label">
+        <p>Today's Fuel</p>
+        <span>Açaí Smoothie Bowl</span>
+      </div>
+    </div>
+
+    <div class="hero__blob"></div>
+    <div class="hero__blob hero__blob-2"></div>
+  </div>
+
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     MARQUEE TICKER
+══════════════════════════════════════════ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Personalized Plans</span><span class="dot">✦</span>
+    <span>Evidence-Based</span><span class="dot">✦</span>
+    <span>Telehealth Available</span><span class="dot">✦</span>
+    <span>No Quick Fix Diets</span><span class="dot">✦</span>
+    <span>Whole Person Approach</span><span class="dot">✦</span>
+    <span>Gut Health</span><span class="dot">✦</span>
+    <span>Weight Management</span><span class="dot">✦</span>
+    <span>Intuitive Eating</span><span class="dot">✦</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     STATS BAR
+══════════════════════════════════════════ -->
+<section class="section--alt">
+  <div class="container">
+    <div class="stats-bar">
+      <div class="stat-item reveal delay-1">
+        <span class="num" data-count="70" data-suffix="+">0+</span>
+        <p>Clients helped reach their goals</p>
+      </div>
+      <div class="stat-item reveal delay-2">
+        <span class="num" data-count="2" data-suffix="+">0+</span>
+        <p>Years of online counseling</p>
+      </div>
+      <div class="stat-item reveal delay-4">
+        <span class="num" data-count="98" data-suffix="%">0%</span>
+        <p>Client satisfaction rate</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     ABOUT PREVIEW
+══════════════════════════════════════════ -->
+<section class="about-strip">
+
+  <!-- Image -->
+  <div class="about-strip__image reveal-left">
+    <!--
+      Niharika's photo for about section
+    -->
+    <img src="images/Niharika_AI.png" alt="Niharika — Certified Nutrition &amp; Food Therapy Consultant" style="width:100%;height:100%;object-fit:cover;min-height:500px;" />
+    <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(255,255,255,0) 50%, rgba(255,255,255,0.55) 100%);pointer-events:none;"></div>
+    <div class="about-strip__badge">
+      <span class="num" data-count="70" data-suffix="+">70+</span>
+      <span class="txt">Lives Changed</span>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="about-strip__content reveal-right">
+    <h2>A holistic approach to wellness<br>using the <em>MPESS framework</em></h2>
+    <p>
+      To ensure deep and lasting health, I move beyond just the "plate." I adopt a holistic approach
+      using my <strong>MPESS framework</strong> — addressing the <strong>Mental, Physical, Emotional,
+      Social, and Spiritual</strong> dimensions of your well-being to truly heal your body from the
+      inside out.
+    </p>
+    <p>
+      Most nutritionists understand food. I understand food <em>and</em> how your
+      body processes it at a molecular level — because I started my career in
+      pharmaceutical science.
+    </p>
+    <p>
+      After earning my Masters in Pharmacy at Manipal College of Pharmaceutical 
+      Sciences, I kept seeing the same pattern: people managing chronic conditions 
+      with medication alone, when the most powerful intervention was sitting on 
+      their plate. That realization changed everything for me.
+    </p>
+    <p>
+      I went back to study what I knew was missing — earning my Diploma in Food 
+      Therapy &amp; Nutrition from the National Board of Vocational Training. Today, 
+      that dual background is your advantage: advice that is both rigorously 
+      science-backed <em>and</em> completely free of diet-culture noise.
+    </p>
+    <p>
+      Whether you're navigating a health condition, rebuilding your relationship 
+      with food, or simply tired of feeling less than your best — you deserve a 
+      plan built on real science, not the latest trend.
+      <strong>That's exactly what I'm here for.</strong>
+    </p>
+
+    <div class="credentials">
+      <span class="credential">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Diploma in Food Therapy &amp; Nutrition, NBVTE
+      </span>
+      <span class="credential">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        M.Pharm, Manipal
+      </span>
+      <span class="credential">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        B.Pharm (Bachelor of Pharmacy)
+      </span>
+    </div>
+
+    <a href="about.html" class="btn btn-primary">My Full Story →</a>
+  </div>
+
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SERVICES PREVIEW
+══════════════════════════════════════════ -->
+<section class="section" id="services">
+  <div class="container">
+
+    <div class="section-header section-header--center reveal">
+      <span class="label">What I Offer</span>
+      <h2>Nutrition services<br>built around <em>you</em></h2>
+      <p class="lead">
+        Every person's relationship with food is different. My services are designed 
+        to meet you exactly where you are on your health journey.
+      </p>
+    </div>
+
+    <div class="services-grid">
+
+      <div class="service-card reveal delay-1">
+        <div class="service-card__icon">🌱</div>
+        <span class="service-card__tag">New</span>
+        <h3>Monthly Wellness Membership</h3>
+        <p>Ongoing support with regular check-ins, unlimited messaging, and resources to keep you accountable and progressing every single month.</p>
+        <a href="services.html" class="service-card__link">Learn more →</a>
+      </div>
+
+      <div class="service-card service-card--featured reveal delay-2">
+        <div class="service-card__icon">🥗</div>
+        <span class="service-card__tag">Most Popular</span>
+        <h3>1:1 Personalized Nutrition</h3>
+        <p>Personalized sessions tailored to your specific health goals, lifestyle, and food preferences. We build a plan together that you'll actually follow.</p>
+        <a href="services.html" class="service-card__link">Learn more →</a>
+      </div>
+
+      <div class="service-card reveal delay-3 service-card--coming-soon">
+        <span class="coming-soon-badge">Coming Soon</span>
+        <div class="service-card__icon">👥</div>
+        <h3>Group Nutrition Programs</h3>
+        <p>Join a community of people on similar journeys. Our group programs offer accountability, expert guidance, and the support of others who truly get it.</p>
+        <span class="service-card__link service-card__link--disabled">Coming Soon</span>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     APPROACH / PHILOSOPHY
+══════════════════════════════════════════ -->
+<section class="section section--alt" id="approach">
+  <div class="container">
+
+    <div class="section-header reveal">
+      <span class="label">My Philosophy</span>
+      <h2>You deserve to enjoy food,<br><em>not fear it</em></h2>
+      <p class="lead">
+        I don't believe in one-size-fits-all diets. My approach is rooted in balance, 
+        self-compassion, and the science of sustainable change.
+      </p>
+    </div>
+
+    <div class="approach-grid">
+
+      <div class="approach-card reveal delay-1">
+        <span class="approach-card__emoji">🔬</span>
+        <h4>Evidence-Based Practice</h4>
+        <p>Every recommendation I make is grounded in the latest nutrition science — not trends, not fads. Real research, translated into practical advice for your daily life.</p>
+      </div>
+
+      <div class="approach-card reveal delay-2">
+        <span class="approach-card__emoji">🤝</span>
+        <h4>Non-Diet, Non-Judgmental</h4>
+        <p>I meet you exactly where you are — no shame, no guilt. We focus on building sustainable habits, not following rigid rules that leave you feeling deprived.</p>
+      </div>
+
+      <div class="approach-card reveal delay-3">
+        <span class="approach-card__emoji">🌿</span>
+        <h4>Whole Person Wellness</h4>
+        <p>Food is just one piece of the puzzle. We also look at sleep, stress, movement, and lifestyle — because your health is so much more than what's on your plate.</p>
+      </div>
+
+      <div class="approach-card reveal delay-1">
+        <span class="approach-card__emoji">🎯</span>
+        <h4>Goal-Centered Planning</h4>
+        <p>Your goals drive everything. Whether it's managing a condition, improving energy, or rebuilding your relationship with food — we build your plan around what matters to you.</p>
+      </div>
+
+      <div class="approach-card reveal delay-2">
+        <span class="approach-card__emoji">📱</span>
+        <h4>Ongoing Support</h4>
+        <p>Change happens between sessions too. I'm available for questions and encouragement because I know that navigating everyday nutrition decisions can be challenging.</p>
+      </div>
+
+      <div class="approach-card reveal delay-3">
+        <span class="approach-card__emoji">🧭</span>
+        <h4>Long-Term Thinking</h4>
+        <p>I'm not here to give you a quick fix. I'm here to help you build lasting habits and a healthier relationship with food that serves you for years to come.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     HOW IT WORKS
+══════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+
+    <div class="section-header section-header--center reveal">
+      <span class="label">The Process</span>
+      <h2>Getting started is<br><em>simpler than you think</em></h2>
+    </div>
+
+    <div class="steps">
+
+      <div class="step reveal delay-1">
+        <div class="step__num">01</div>
+        <h4>Book a Discovery Call</h4>
+        <p>Schedule a free 15-minute call to chat about your goals, ask questions, and see if we're the right fit for each other.</p>
+      </div>
+
+      <div class="step reveal delay-2">
+        <div class="step__num">02</div>
+        <h4>Choose Your Plan</h4>
+        <p>Together we'll select the service that best matches your goals, schedule, and budget.</p>
+      </div>
+
+      <div class="step reveal delay-3">
+        <div class="step__num">03</div>
+        <h4>Initial Consultation</h4>
+        <p>A 60-minute deep-dive session where we explore your health history, lifestyle, food preferences, and set your personalized goals.</p>
+      </div>
+
+      <div class="step reveal delay-4">
+        <div class="step__num">04</div>
+        <h4>Ongoing Sessions & Support</h4>
+        <p>Regular follow-up sessions to track progress, troubleshoot challenges, and keep refining your nutrition plan as your life evolves.</p>
+      </div>
+
+    </div>
+
+    <div style="text-align:center; margin-top:56px;" class="reveal">
+      <a href="contact.html" class="btn btn-primary">Start Your Journey Today</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     TESTIMONIALS
+══════════════════════════════════════════ -->
+<section class="section section--alt" id="testimonials">
+  <div class="container">
+
+    <div class="section-header section-header--center reveal">
+      <span class="label">Client Stories</span>
+      <h2>Real people,<br><em>real transformations</em></h2>
+      <p class="lead">
+        Don't just take my word for it. Here's what my clients have to say 
+        about their nutrition journeys.
+      </p>
+    </div>
+
+    <div class="testimonials-grid">
+
+      <!-- Real story 1: Sri Lakshmi M — PCOS + Weight Loss -->
+      <div class="testimonial-card reveal delay-1">
+        <span class="condition-badge badge-pcos">🌸 PCOS</span>
+        <span class="condition-badge badge-weight-loss">⚖️ Weight Loss</span>
+        <div class="testimonial-card__stars">★★★★★</div>
+        <blockquote>
+          Over just a few weeks, I've been feeling lighter, healthier, and more positive — all thanks to Niharika's guidance. She taught me portion control and healthy habits I've truly made my own. Whenever I felt like giving up, she gently guided me back on track. I've lost 6 kg, and most importantly — my periods have become regular again.
+        </blockquote>
+        <div class="testimonial-result">
+          <span class="metric">–6 kg</span>
+          <span>lost &amp; periods regularised — PCOS managed</span>
+        </div>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">A</div>
+          <div class="testimonial-card__author-info">
+            <strong>Sri Lakshmi M</strong>
+            <span>1-on-1 Nutrition Counseling</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real story 2: Sakshi Varadhi — Weight Gain -->
+      <div class="testimonial-card reveal delay-2">
+        <span class="condition-badge badge-weight-gain">💪 Weight Gain</span>
+        <div class="testimonial-card__stars">★★★★★</div>
+        <blockquote>
+          I've been following my personalised diet plan for four months, and the journey has been genuinely transformative. I started at 35 kg and have now reached 42 kg — a steady, healthy gain I'm truly proud of. Throughout the process, I felt energetic, happy, and motivated. Niharika helped me understand it wasn't just about gaining weight, but about feeling better physically and mentally.
+        </blockquote>
+        <div class="testimonial-result">
+          <span class="metric">+7 kg</span>
+          <span>gained over 4 months — steady &amp; healthy</span>
+        </div>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">P</div>
+          <div class="testimonial-card__author-info">
+            <strong>Sakshi Varadhi</strong>
+            <span>1-on-1 Nutrition Counseling</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real story 3: Chandrakala A — Arthritis Recovery -->
+      <div class="testimonial-card reveal delay-3">
+        <span class="condition-badge badge-arthritis">🦴 Joint Health</span>
+        <div class="testimonial-card__stars">★★★★★</div>
+        <blockquote>
+          Because of Niharika's consultation, my arthritis symptoms have improved remarkably. I was even able to stop taking my medication — and those symptoms have not returned. Her diet plan suited my body perfectly and helped me understand what to eat, how much to eat, and how to manage portions. I also reached my target weight. I am deeply grateful for this guidance.
+        </blockquote>
+        <div class="testimonial-result">
+          <span class="metric">Target weight</span>
+          <span>reached &amp; off arthritis medication</span>
+        </div>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">R</div>
+          <div class="testimonial-card__author-info">
+            <strong>Chandrakala A</strong>
+            <span>Medical Nutrition Therapy</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real story 4: Lohitha — Family / Trust -->
+      <div class="testimonial-card reveal delay-4">
+        <span class="condition-badge badge-family">👨‍👩‍👧 Family Nutrition</span>
+        <div class="testimonial-card__stars">★★★★★</div>
+        <blockquote>
+          I had a truly wonderful experience working with Niharika for my daughter's weight gain journey. She was so encouraging and always took the time to explain everything clearly — never rushing. She responded to every message, no matter when I reached out. She isn't just a nutritionist — at this point, she genuinely feels like a member of our family.
+        </blockquote>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">L</div>
+          <div class="testimonial-card__author-info">
+            <strong>Lohitha</strong>
+            <span>Paediatric / Family Nutrition</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center; margin-top:40px;" class="reveal">
+      <a href="stories.html" class="btn btn-outline">Read More Stories →</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     FREEBIE / LEAD MAGNET
+══════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="freebie reveal">
+
+      <!-- Smoothie bowl image panel -->
+      <div class="freebie__image">
+        <img src="images/greek-quinoa-buddha-bowl-vegan-gluten-free-1.jpg" alt="Nourishing smoothie bowl — NUme by Niharika" />
+      </div>
+
+      <!-- Text content -->
+      <div class="freebie__content">
+        <span class="label">Free Resource</span>
+        <h3>Grab my Free <em>7-Day Meal Prep Guide</em></h3>
+        <p>
+          No complicated recipes, no expensive ingredients — just a simple, 
+          realistic guide to nourishing your body through the week. 
+          Think bowls just like this one. Yours free!
+        </p>
+      </div>
+
+      <!-- Signup form -->
+      <form class="freebie-form" onsubmit="return false;">
+        <input type="text" placeholder="Your first name" autocomplete="given-name" />
+        <input type="email" placeholder="Your email address" autocomplete="email" />
+        <button type="submit" class="btn btn-terra">Send Me the Guide!</button>
+      </form>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     CTA SECTION
+══════════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="container">
+    <span class="label label--sage reveal">Ready to Begin?</span>
+    <h2 class="reveal">Your healthiest chapter<br>starts with one call</h2>
+    <p class="reveal">
+      Book your free 15-minute discovery call today. No pressure, no commitment —
+      just a conversation about where you are and where you want to be.
+    </p>
+    <div class="btn-actions reveal">
+      <a href="contact.html" class="btn btn-white">Contact Us</a>
+      <a href="services.html" class="btn" style="border-color:rgba(255,255,255,0.4); color:rgba(255,255,255,0.85);">View Services</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+
+      <!-- Brand -->
+      <div class="footer__brand">
+        <a href="index.html" class="nav__logo">
+          <span class="logo-brand">NU<span style="color:var(--terra);font-style:italic;">me</span></span>
+          <span class="logo-sub" style="color:rgba(255,255,255,0.5);">by Niharika</span>
+        </a>
+        <p>
+          Science-backed, personalized nutrition counseling by Niharika. 
+          No fad diets — just real, joyful, sustainable wellness. 
+          Telehealth available.
+        </p>
+        <div class="footer__social">
+          <a href="#" aria-label="Instagram">📷</a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer__col">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Services -->
+      <div class="footer__col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="services.html">1:1 Personalized Nutrition</a></li>
+          <li><a href="services.html">Monthly Wellness Membership</a></li>
+          <li><a href="services.html">Group Nutrition Programs</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="footer__col">
+        <h5>Get in Touch</h5>
+        <address>
+          <!-- Replace with real contact info -->
+          📍 Hyderabad, India<br><br>
+          📧 <a href="mailto:nume.careteam@gmail.com" style="color:rgba(255,255,255,0.55)">nume.careteam@gmail.com</a><br><br>
+        </address>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer__bottom">
+      <p>© 2025 NUme by Niharika. All rights reserved.</p>
+      <div class="footer__bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Disclaimer</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

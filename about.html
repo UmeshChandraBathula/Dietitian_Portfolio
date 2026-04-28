@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Niharika — NUme by Niharika</title>
+  <meta name="description" content="Meet Niharika, a Certified Nutrition &amp; Food Therapy Consultant passionate about helping people build a healthy, joyful relationship with food." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* Page-specific styles */
+    .bio-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .bio-image-wrap {
+      position: relative;
+    }
+    .bio-image-wrap img,
+    .bio-image-placeholder {
+      border-radius: var(--radius);
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+    }
+    .bio-image-placeholder {
+      background: linear-gradient(160deg, #c5d9c1 0%, #e8c4a0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8rem;
+      opacity: 0.5;
+    }
+    .bio-image-wrap::before {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: -16px;
+      right: 16px;
+      bottom: 16px;
+      border: 2px solid var(--sage-pale);
+      border-radius: var(--radius);
+      z-index: -1;
+    }
+    @media (max-width: 768px) {
+      .bio-section { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    /* Fun facts strip */
+    .fun-facts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .fun-fact {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      text-align: center;
+      border: 1px solid var(--cream-dark);
+      transition: transform var(--transition);
+    }
+    .fun-fact:hover { transform: translateY(-6px); }
+    .fun-fact__emoji { font-size: 2.2rem; margin-bottom: 12px; }
+    .fun-fact p { font-size: 0.88rem; color: var(--grey); line-height: 1.6; }
+    .fun-fact strong { display: block; color: var(--charcoal); margin-bottom: 4px; font-size: 0.95rem; }
+    @media (max-width: 768px) { .fun-facts { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .fun-facts { grid-template-columns: 1fr; } }
+
+    /* Education timeline */
+    .timeline {
+      margin-top: 48px;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--sage-pale);
+    }
+    .timeline-item {
+      display: flex;
+      gap: 32px;
+      padding: 0 0 40px 0;
+      position: relative;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-dot {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--sage);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .timeline-content {
+      padding-top: 8px;
+    }
+    .timeline-content .year {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 4px;
+    }
+    .timeline-content h4 { margin-bottom: 4px; }
+    .timeline-content p { font-size: 0.88rem; color: var(--grey); }
+
+    /* Full testimonials */
+    .testimonials-full {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 56px;
+    }
+    @media (max-width: 768px) { .testimonials-full { grid-template-columns: 1fr; } }
+  </style>
+</head>
+
+<body>
+
+<!-- NAV (same on all pages) -->
+<nav class="nav" id="mainNav">
+  <div class="container">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <span class="logo-brand">NU<span>me</span></span>
+        <span class="logo-sub">by Niharika</span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="index.html#approach">Approach</a></li>
+        <li><a href="stories.html">Stories</a></li>
+        <li><a href="contact.html" class="btn btn-primary nav__cta">Contact Us</a></li>
+      </ul>
+      <button class="nav__toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile">
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="index.html#approach">Approach</a>
+      <a href="stories.html">Client Stories</a>
+      <a href="contact.html" class="btn btn-primary">Contact Us</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <span class="label">Get to Know Me</span>
+    <h1>The person behind<br><em>your nutrition journey</em></h1>
+    <p>More than credentials — a real human who genuinely cares about your wellbeing.</p>
+  </div>
+</section>
+
+
+<!-- BIO SECTION -->
+<section class="section">
+  <div class="container">
+    <div class="bio-section">
+
+      <div class="bio-image-wrap reveal-left">
+        <!--
+          Niharika's photo
+        -->
+        <img src="images/Niharika_AI.png" alt="Niharika — Certified Nutrition &amp; Food Therapy Consultant" />
+      </div>
+
+      <div class="reveal-right">
+        <span class="label">My Story</span>
+        <h2>Why I became a<br><em>Nutrition &amp; Food Therapy Consultant</em></h2>
+
+        <p style="color:var(--grey); margin-bottom:16px; line-height:1.85;">
+          My journey into nutrition wasn't a straight line — it started in a pharmacy lab.
+          After completing my Bachelor's and Master's in Pharmacy at Manipal College of
+          Pharmaceutical Sciences, I kept seeing the same pattern: people managing chronic
+          conditions with medication alone, when the most powerful intervention was sitting
+          on their plate.
+        </p>
+        <p style="color:var(--grey); margin-bottom:16px; line-height:1.85;">
+          That realization changed everything for me. I went back to study what I knew was
+          missing — earning my Diploma in Food Therapy &amp; Nutrition from the National Board
+          of Vocational Training Education (NBVTE), a vocational board under the Ministry
+          of MSME. That dual background became my biggest advantage as a practitioner:
+          advice that is both rigorously science-backed <em>and</em> completely free of
+          diet-culture noise.
+        </p>
+        <p style="color:var(--grey); margin-bottom:32px; line-height:1.85;">
+          I launched NUme to offer the kind of individualized, compassionate care I believe
+          everyone deserves — where food is medicine, and your plate is the first line of
+          defence. Whether you're navigating a health condition, rebuilding your relationship
+          with food, or simply tired of feeling less than your best, you deserve a plan built
+          on real science. That's exactly what I'm here for.
+        </p>
+
+        <div class="credentials">
+          <span class="credential">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Diploma in Food Therapy &amp; Nutrition, NBVTE
+          </span>
+          <span class="credential">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            M.Pharm (Master of Pharmacy)
+          </span>
+          <span class="credential">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            B.Pharm (Bachelor of Pharmacy)
+          </span>
+        </div>
+
+        <div style="margin-top:36px; display:flex; gap:16px; flex-wrap:wrap;">
+          <a href="contact.html" class="btn btn-primary">Work With Me</a>
+          <a href="services.html" class="btn btn-outline">My Services</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- FOOD IMAGE BANNER -->
+<section style="padding: 0;">
+  <div style="
+    position: relative;
+    height: 380px;
+    overflow: hidden;
+  ">
+    <img
+      src="images/greek-quinoa-buddha-bowl-vegan-gluten-free-1.jpg"
+      alt="Nourishing food — NUme by Niharika"
+      style="width:100%; height:100%; object-fit:cover; object-position:center 60%;"
+    />
+    <!-- Overlay with quote -->
+    <div style="
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(74,103,65,0.82) 0%, rgba(44,44,44,0.55) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px;
+    ">
+      <div>
+        <p style="
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(1.5rem, 3vw, 2.4rem);
+          font-style: italic;
+          font-weight: 500;
+          color: #fff;
+          line-height: 1.4;
+          max-width: 700px;
+          margin: 0 auto 16px;
+        ">
+          "Let food be thy medicine, and medicine be thy food."
+        </p>
+        <span style="
+          font-size: 0.78rem;
+          font-weight: 700;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.6);
+        ">— Hippocrates</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- EDUCATION & EXPERIENCE TIMELINE -->
+<section class="section">
+  <div class="container" style="max-width:800px;">
+    <div class="section-header reveal">
+      <span class="label">Education & Experience</span>
+      <h2>My path to becoming<br><em>your nutrition consultant</em></h2>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item reveal delay-1">
+        <div class="timeline-dot">🎓</div>
+        <div class="timeline-content">
+          <span class="year">B.Pharm</span>
+          <h4>Bachelor of Pharmacy</h4>
+          <p>Foundational training in pharmaceutical sciences, biochemistry, pharmacology, and human physiology — building the scientific lens that shapes everything I do today.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal delay-2">
+        <div class="timeline-dot">🔬</div>
+        <div class="timeline-content">
+          <span class="year">M.Pharm</span>
+          <h4>Master of Pharmacy — Manipal College of Pharmaceutical Sciences</h4>
+          <p>Advanced study in pharmaceutical sciences at one of India's most respected institutions, deepening understanding of how drugs and nutrients interact with the body at a molecular level.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal delay-3">
+        <div class="timeline-dot">🌿</div>
+        <div class="timeline-content">
+          <span class="year">Apr 2024 – Mar 2025</span>
+          <h4>Diploma in Food Therapy &amp; Nutrition — NBVTE</h4>
+          <p>Specialized diploma from the National Board of Vocational Training Education (Ministry of MSME), covering clinical nutrition, therapeutic diets, food science, and dietary counseling for chronic conditions.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal delay-4">
+        <div class="timeline-dot">💚</div>
+        <div class="timeline-content">
+          <span class="year">2025 – Present</span>
+          <h4>Private Practice — NUme by Niharika</h4>
+          <p>Launched NUme to offer personalized, online nutrition counseling combining pharmaceutical science with food therapy — helping 70+ clients manage chronic conditions and rebuild their relationship with food.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- TESTIMONIALS -->
+<section class="section section--alt" id="testimonials">
+  <div class="container">
+    <div class="section-header section-header--center reveal">
+      <span class="label">Client Stories</span>
+      <h2>Words that mean the world<br><em>to me</em></h2>
+    </div>
+
+    <div class="testimonials-full">
+
+      <div class="testimonial-card reveal delay-1">
+        <div class="testimonial-card__stars">★★★★★</div>
+        <blockquote>I had been struggling with PCOS for over three years, trying every restrictive diet I came across — nothing stuck. Niharika's approach was completely different. She looked at my whole picture, not just the numbers on a scale. Within two months, my energy stabilized, my cycles became more regular, and for the first time I felt genuinely in control of my own body. She doesn't just give you a meal plan; she gives you understanding.</blockquote>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">P</div>
+          <div class="testimonial-card__author-info"><strong>Priya S.</strong><span>1-on-1 Counseling</span></div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal delay-2">
+        <div class="testimonial-card__stars">★★★★★</div>
+        <blockquote>My doctor flagged my blood sugar as borderline and I was genuinely scared of going on long-term medication. A friend recommended Niharika and it changed everything. Her pharmaceutical background really shows — she explained the "why" behind every food choice in a way that finally made sense to me. Six months in, my HbA1c is back in the normal range without any medication. I can't recommend her enough.</blockquote>
+        <div class="testimonial-card__author">
+          <div class="testimonial-card__avatar">A</div>
+          <div class="testimonial-card__author-info"><strong>Arjun M.</strong><span>Monthly Membership</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <span class="label label--sage reveal">Let's Connect</span>
+    <h2 class="reveal">Ready to write your own<br>success story?</h2>
+    <p class="reveal">Book a free 15-minute discovery call and let's see how I can support your health journey.</p>
+    <div class="btn-actions reveal">
+      <a href="contact.html" class="btn btn-white">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="index.html" class="nav__logo">
+          <span class="logo-brand">NU<span style="color:var(--terra);font-style:italic;">me</span></span>
+          <span class="logo-sub" style="color:rgba(255,255,255,0.5);">by Niharika</span>
+        </a>
+        <p>Science-backed, personalized nutrition counseling by Niharika. Telehealth available.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="Instagram">📷</a>
+        </div>
+      </div>
+      <div class="footer__col"><h5>Quick Links</h5><ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+      <div class="footer__col"><h5>Services</h5><ul>
+        <li><a href="services.html">1-on-1 Counseling</a></li>
+        <li><a href="services.html">Monthly Membership</a></li>
+        <li><a href="services.html">Group Programs</a></li>
+      </ul></div>
+      <div class="footer__col"><h5>Get in Touch</h5><address>
+        📍 Hyderabad, India<br><br>
+        📧 <a href="mailto:nume.careteam@gmail.com" style="color:rgba(255,255,255,0.55)">nume.careteam@gmail.com</a>
+      </address></div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2025 NUme by Niharika. All rights reserved.</p>
+      <div class="footer__bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+# macOS
+.DS_Store
+**/.DS_Store
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# Editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Temp / OS
+*.tmp
+*.bak
+*.orig
+
+# Node.js
+node_modules/
+package-lock.json
